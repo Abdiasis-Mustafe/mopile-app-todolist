@@ -19,11 +19,12 @@
 // })
 
 
-import { View, Text, StyleSheet } from 'react-native';
-import React from 'react';
+import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, TextInput, TouchableOpacity } from 'react-native';
+import React,{useState} from 'react';
 import Task from '../components/Task'
 
 const Index = () => {
+  const [task,SetTask]= useState();
   return (
     <View style={styles.container}>
       <View style={styles.Main}>
@@ -32,6 +33,18 @@ const Index = () => {
         <Task text={"text2"}/>
         </View>
       </View>
+   {/*  input part  */}
+   <KeyboardAvoidingView behavior={Platform.OS==="android"? "padding":'height'} style={styles.WritetaskWrap}>
+    <TextInput  style={styles.input} placeholder='Write task here'/>
+    <TouchableOpacity>
+      <View style={styles.AddWraper}>
+        <Text style={styles.Addtext}>
+          +
+        </Text>
+      </View>
+    </TouchableOpacity>
+
+   </KeyboardAvoidingView>
     </View>
   );
 };
@@ -47,11 +60,39 @@ const styles = StyleSheet.create({
     padding:20
   },
   Title:{
-    fontSize:20,
+    fontSize:24,
     fontWeight:"bold"
   },
   items:{
   marginTop:30,
-  }
+  },
+  WritetaskWrap:{
+    position:"absolute",
+    bottom:60,
+    width:"100%",
+    flexDirection:"row",
+    justifyContent:"space-around",
+    alignItems:'center'
+  },
+  input:{
+    paddingVertical:15,
+    paddingHorizontal:15,
+    backgroundColor:"#fff",
+    borderRadius:60,
+    borderColor:"#C0C0C0",
+    borderWidth:1,
+    width:250
+  },
+  AddWraper:{
+    width:60,
+    height:60,
+    backgroundColor:"#fff",
+    borderRadius:60,
+    justifyContent:'center',
+    alignItems:'center',
+    borderColor:"#C0C0C0",
+    borderWidth:1,
+  },
+  Addtext:{},
 });
 export default Index;
